@@ -1,17 +1,18 @@
 package com.teleconsulting.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "patient")
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "patient_name")
     private String name;
+    @Column(name = "patient_gender")
     private String gender;
+    @Column(name = "patient_phoneNumber")
     private String phoneNumber;
 
     public Long getId() {
