@@ -14,6 +14,7 @@ public class DoctorController {
     @Autowired
     private DoctorService doctorService;
 
+    // "localhost:8081/doctor/"
     @GetMapping("/doctors")
     public List<Doctor> getDoctors(){
         return doctorService.getDoctors();
