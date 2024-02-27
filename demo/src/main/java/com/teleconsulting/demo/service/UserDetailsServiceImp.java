@@ -16,7 +16,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
     }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return doctorRepository.findByPhoneNumber(username)
+        return doctorRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found!!"));
     }
 }

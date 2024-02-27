@@ -1,10 +1,8 @@
 package com.teleconsulting.demo.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,17 +19,31 @@ import java.util.List;
 public class Doctor implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "doc_id")
     private Long id;
+
     @Column(name = "doc_name")
+    @NotNull
     private String name;
+
     @Column(name = "doc_gender")
+    @NotNull
     private String gender;
-    @Column(name = "doc_phoneNo")
+
+    @Column(name = "doc_email", unique = true)
+    @NotNull
+    private String email;
+
+    @Column(name = "doc_phoneNo", unique = true)
+    @NotNull
     private String phoneNumber;
+
     @Column(name = "doc_password")
+    @NotNull
     private String password;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private  Role role;
 
     @Override
@@ -46,7 +58,7 @@ public class Doctor implements UserDetails {
 
     @Override
     public String getUsername() {
-        return phoneNumber;
+        return email;
     }
 
     @Override

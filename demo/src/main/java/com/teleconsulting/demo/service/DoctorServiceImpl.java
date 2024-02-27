@@ -1,10 +1,13 @@
 package com.teleconsulting.demo.service;
 
+import com.teleconsulting.demo.handler.NotFoundException;
 import com.teleconsulting.demo.model.Doctor;
 import com.teleconsulting.demo.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
+import javax.print.Doc;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,20 +27,35 @@ public class DoctorServiceImpl implements DoctorService{
         if(doc.isPresent()){
             return doc.get();
         }
-        throw new RuntimeException("Doctor is not found for the id :"+id);
+        throw new NotFoundException("Doctor is not found for the id :"+id);
     }
 
     @Override
     public void deleteDoctor(Long id) {
+        Optional<Doctor> existingDoctor = doctorRepository.findById(id);
+        if (existingDoctor.isEmpty()) {
+            throw new NotFoundException("Doctor doesn't exists !!\n");
+        }
         doctorRepository.deleteById(id);
     }
 
     @Override
     public Doctor saveDoctor(Doctor doctor) {
+        Optional<Doctor> existingDoctor = doctorRepository.findByEmail(doctor.getEmail());
+        if (existingDoctor.isPresent()) {
+            throw new NotFoundException("Email already exists: " + doctor.getEmail());
+        }
         return doctorRepository.save(doctor);
     }
     @Override
     public  Doctor updateDoctor(Doctor doctor){
-        return doctorRepository.save(doctor);
+        Optional<Doctor> existingDoctor = doctorRepository.findById(doctor.getId());
+        if (existingDoctor.isPresent()) {
+            return doctorRepository.save(doctor);
+        }
+        else {
+            throw new NotFoundException("Doctor doesn't exists !!\n");
+        }
+
     }
 }

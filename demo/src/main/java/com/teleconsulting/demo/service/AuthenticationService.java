@@ -31,7 +31,7 @@ public class AuthenticationService {
         doctor.setGender(request.getGender());
         doctor.setPhoneNumber(request.getPhoneNumber());
         doctor.setPassword((passwordEncoder.encode(request.getPassword())));
-
+        doctor.setEmail(request.getEmail());
         doctor.setRole(request.getRole());
         doctor = doctorRepository.save(doctor);
 
@@ -48,7 +48,7 @@ public class AuthenticationService {
                 )
         );
 
-        Doctor doctor = doctorRepository.findByPhoneNumber(request.getUsername()).orElseThrow();
+        Doctor doctor = doctorRepository.findByEmail(request.getUsername()).orElseThrow();
         String token = jwtService.generateToken(doctor);
 
         return new AuthenticationResponse(token);

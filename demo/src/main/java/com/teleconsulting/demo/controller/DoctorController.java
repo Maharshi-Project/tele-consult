@@ -29,7 +29,7 @@ public class DoctorController {
         doctorService.saveDoctor(doctor);
         return "New Doctor Added";
     }
-    @PutMapping("/doctors/{id}")
+    @PutMapping("/update/{id}")
     public Doctor updateDoctor(@PathVariable Long id, @RequestBody Doctor doctor){
         doctor.setId(id);
         return doctorService.updateDoctor(doctor);
