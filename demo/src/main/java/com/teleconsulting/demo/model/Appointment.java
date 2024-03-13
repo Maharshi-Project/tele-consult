@@ -1,63 +1,36 @@
 package com.teleconsulting.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.sql.Time;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Table(name = "Appointment")
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "patient_name")
+    @NotNull
     private String patientname;
+    @Column(name = "doc_name")
+    @NotNull
     private String doctorname;
+    @Column(name = "time")
+    @NotNull
     private Time apttime;
+    @Column(name = "apt_date")
+    @NotNull
     private Date dptdate;
 
-    public Appointment() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPatientname() {
-        return patientname;
-    }
-
-    public void setPatientname(String patientname) {
-        this.patientname = patientname;
-    }
-
-    public String getDoctorname() {
-        return doctorname;
-    }
-
-    public void setDoctorname(String doctorname) {
-        this.doctorname = doctorname;
-    }
-
-    public Time getApttime() {
-        return apttime;
-    }
-
-    public void setApttime(Time apttime) {
-        this.apttime = apttime;
-    }
-
-    public Date getDptdate() {
-        return dptdate;
-    }
-
-    public void setDptdate(Date dptdate) {
-        this.dptdate = dptdate;
-    }
 }

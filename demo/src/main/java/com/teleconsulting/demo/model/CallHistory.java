@@ -1,10 +1,19 @@
 package com.teleconsulting.demo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class CallHistory {
     @Id
@@ -12,64 +21,19 @@ public class CallHistory {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "did")
+    @JoinColumn(name = "doc_id")
     private Doctor doctor;
 
     @ManyToOne
-    @JoinColumn(name = "pid")
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 
+    @Column(name = "date")
+    @NotNull
     private LocalDate callDate;
+    @Column(name = "time")
+    @NotNull
     private LocalTime callTime;
+    @Column(name = "prescription")
     private String prescription;
-
-    // Getters and setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
-
-    public LocalDate getCallDate() {
-        return callDate;
-    }
-
-    public void setCallDate(LocalDate callDate) {
-        this.callDate = callDate;
-    }
-
-    public LocalTime getCallTime() {
-        return callTime;
-    }
-
-    public void setCallTime(LocalTime callTime) {
-        this.callTime = callTime;
-    }
-
-    public String getPrescription() {
-        return prescription;
-    }
-
-    public void setPrescription(String prescription) {
-        this.prescription = prescription;
-    }
 }
