@@ -1,83 +1,49 @@
 package com.teleconsulting.demo.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-import java.util.Collection;
-import java.util.List;
-
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "doctor")
-public class Doctor implements UserDetails {
+public class Doctor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "doc_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "doc_name")
-    @NotNull
     private String name;
-
-    @Column(name = "doc_gender")
-    @NotNull
     private String gender;
-
-    @Column(name = "doc_email", unique = true)
-    @NotNull
-    private String email;
-
-    @Column(name = "doc_phoneNo", unique = true)
-    @NotNull
     private String phoneNumber;
 
-    @Column(name = "doc_password")
-    @NotNull
-    private String password;
-
-    @Enumerated(EnumType.STRING)
-    @NotNull
-    private  Role role;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+    public Long getId() {
+        return id;
     }
 
-    @Override
-    public String getPassword() {
-        return password;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    @Override
-    public String getUsername() {
-        return email;
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
+    public String getGender() {
+        return gender;
     }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    @Override
-    public boolean isEnabled() {
-        return true;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+// Getters and setters
 }
