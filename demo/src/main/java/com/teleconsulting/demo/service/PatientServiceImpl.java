@@ -1,7 +1,6 @@
 package com.teleconsulting.demo.service;
 
 import com.teleconsulting.demo.handler.NotFoundException;
-import com.teleconsulting.demo.model.Doctor;
 import com.teleconsulting.demo.model.Patient;
 import com.teleconsulting.demo.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;

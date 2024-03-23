@@ -4,10 +4,8 @@ import com.teleconsulting.demo.handler.NotFoundException;
 import com.teleconsulting.demo.model.Doctor;
 import com.teleconsulting.demo.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
-import javax.print.Doc;
 import java.util.List;
 import java.util.Optional;
 
